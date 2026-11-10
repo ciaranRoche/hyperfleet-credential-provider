@@ -4,5 +4,13 @@
   ],
   "schedule": [
     "at any time"
+  ],
+  "packageRules": [
+    {
+      "description": "Hold the golang builder image on Go 1.26: Red Hat has not published Go 1.27 builder images (ubi9/go-toolset, ocp/builder) yet, so Prow and the other HyperFleet repos are still on 1.26. Remove once they exist (HYPERFLEET-1916).",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["golang"],
+      "allowedVersions": "<1.27"
+    }
   ]
 }
