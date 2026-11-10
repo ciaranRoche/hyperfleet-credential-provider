@@ -43,7 +43,7 @@ func (p *Provider) GetClusterInfo(ctx context.Context, clusterName, location str
 		return nil, fmt.Errorf("failed to load GCP credentials: %w", err)
 	}
 
-	gcpCreds, err := google.CredentialsFromJSON(ctx, []byte(creds.RawJSON), container.CloudPlatformScope)
+	gcpCreds, err := google.CredentialsFromJSONWithType(ctx, []byte(creds.RawJSON), google.ServiceAccount, container.CloudPlatformScope)
 	if err != nil {
 		p.logger.Error("Failed to create GCP credentials",
 			logger.String("cluster", clusterName),
