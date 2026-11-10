@@ -130,7 +130,7 @@ func (g *TokenGenerator) createTokenSource(ctx context.Context, creds *credentia
 		).WithField("provider", "gcp")
 	}
 
-	googleCreds, err := google.CredentialsFromJSON(ctx, credsJSON, g.config.Scopes...)
+	googleCreds, err := google.CredentialsFromJSONWithType(ctx, credsJSON, google.ServiceAccount, g.config.Scopes...)
 	if err != nil {
 		return nil, errors.Wrap(
 			errors.ErrCredentialInvalid,
